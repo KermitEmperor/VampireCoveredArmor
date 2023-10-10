@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.kermitemperor.vampirismcoveredarmor.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "VampirismCoveredArmor.refmap.json",
+  "mixins": [
+    "VampirePlayerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
