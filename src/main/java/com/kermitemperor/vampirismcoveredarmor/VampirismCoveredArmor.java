@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 public class VampirismCoveredArmor {
 
     public static final String MOD_ID = "vampirismcoveredarmor";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public VampirismCoveredArmor() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -26,13 +26,15 @@ public class VampirismCoveredArmor {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, VCACommonConfigs.SPEC, "vampirismcoveredarmor-common.toml");
 
+
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
         // Some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        LOGGER.info("[VampirismCoveredArmor]: Pre-init phase started");
+        //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
 
