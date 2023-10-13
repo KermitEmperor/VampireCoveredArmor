@@ -2,9 +2,16 @@ package com.kermitemperor.vampirismcoveredarmor;
 
 import com.kermitemperor.vampirismcoveredarmor.config.VCACommonConfigs;
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -24,6 +31,7 @@ public class VampirismCoveredArmor {
 
         eventBus.addListener(this::setup);
 
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, VCACommonConfigs.SPEC, "vampirismcoveredarmor-common.toml");
 
 
@@ -35,6 +43,16 @@ public class VampirismCoveredArmor {
         // Some preinit code
         LOGGER.info("[VampirismCoveredArmor]: Pre-init phase started");
         //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public void addCoveredArmorTooltip(final ItemTooltipEvent event) {
+        ItemStack stack = event.getItemStack();
+        //noinspection deprecation
+        if (VCACommonConfigs.SUNPROTECTED_ARMOR.get().contains(BuiltInRegistries.ITEM.getKey(stack.getItem()).toString())) {
+            event.getToolTip().add(Component.translatable("tooltip.vampirismcoveredarmor.sunprotected").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.UNDERLINE));
+        }
     }
 
 
