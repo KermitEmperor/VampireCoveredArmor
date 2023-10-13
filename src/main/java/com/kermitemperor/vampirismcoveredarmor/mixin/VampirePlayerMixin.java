@@ -6,7 +6,7 @@ import com.kermitemperor.vampirismcoveredarmor.config.VCACommonConfigs;
 import de.teamlapen.vampirism.api.entity.player.vampire.IVampirePlayer;
 import de.teamlapen.vampirism.entity.player.FactionBasePlayer;
 import de.teamlapen.vampirism.entity.player.vampire.VampirePlayer;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
@@ -40,7 +40,7 @@ public abstract class VampirePlayerMixin extends FactionBasePlayer<IVampirePlaye
     @Unique
     public boolean isInCoveredArmor(Player player) {
         for (ItemStack stack : player.getArmorSlots()) {
-            String itemRegistryName = Registry.ITEM.getKey(stack.getItem()).toString();
+            String itemRegistryName = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
             if (VCACommonConfigs.SUNPROTECTED_ARMOR.get().contains(itemRegistryName) == VCACommonConfigs.INVERT.get()) return false;
         }
         return true;
